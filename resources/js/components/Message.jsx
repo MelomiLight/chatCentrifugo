@@ -4,19 +4,19 @@ import axios from "axios";
 const Message = ({ userId, message }) => {
     const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        // Fetch user details based on user_id
-        const fetchUser = async () => {
-            try {
-                const response = await axios.get(`/users/${message.user_id}`);
-                setUser(response.data);
-            } catch (error) {
-                console.log("Error fetching user:", error);
-            }
-        };
-
-        fetchUser();
-    }, [message.user_id]);
+    // useEffect(() => {
+    //     // Fetch user details based on user_id
+    //     const fetchUser = async () => {
+    //         try {
+    //             const response = await axios.get(`/users/${message.user_id}`);
+    //             setUser(response.data);
+    //         } catch (error) {
+    //             console.log("Error fetching user:", error);
+    //         }
+    //     };
+    //
+    //     fetchUser();
+    // }, [message.user_id]);
 
     return (
         <div className={`row ${userId === message.user_id ? "justify-content-end" : ""}`}>

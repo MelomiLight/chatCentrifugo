@@ -11,20 +11,22 @@ class CentrifugoAction
     const API_PATH = '/api';
     protected $config = [];
     protected HttpClient $httpClient;
+    protected $centrifugoProperties;
 
     public function __construct(HttpClient $httpClient)
     {
         $this->httpClient = $httpClient;
+        $this->centrifugoProperties = Config::get('broadcasting.connections.centrifugo');
         $this->config = [
-            'token_hmac_secret_key' => env('CENTRIFUGO_TOKEN_HMAC_SECRET_KEY',''),
-            'api_key'               => env('CENTRIFUGO_API_KEY',''),
-            'url'                   => env('CENTRIFUGO_URL', 'http://localhost:8000'), // centrifugo api url
-            'verify'                => env('CENTRIFUGO_VERIFY', false), // Verify host ssl if centrifugo uses this
-            'ssl_key'               => env('CENTRIFUGO_SSL_KEY', null), // Self-Signed SSl Key for Host (require verify=true)
-            'use_namespace'         => env('CENTRIFUGO_USE_NAMESPACE', false),
-            'default_namespace'     => env('CENTRIFUGO_DEFAULT_NAMESPACE', 'default:'),
-            'private_namespace'     => env('CENTRIFUGO_PRIVATE_NAMESPACE', 'private:'),
-            'presence_namespace'    => env('CENTRIFUGO_PRESENCE_NAMESPACE', 'presence:'),
+            'token_hmac_secret_key' => $this->centrifugoProperties['token_hmac_secret_key'],
+            'api_key' => $this->centrifugoProperties['api_key'],
+            'url' => $this->centrifugoProperties['url'],
+            'verify' => $this->centrifugoProperties['verify'],
+            'ssl_key' => $this->centrifugoProperties['ssl_key'], // Self-Signed SSl Key for Host (require verify=true)
+            'use_namespace' => $this->centrifugoProperties['use_namespace'],
+            'default_namespace' => $this->centrifugoProperties['default_namespace'],
+            'private_namespace' => $this->centrifugoProperties['private_namespace'],
+            'presence_namespace' => $this->centrifugoProperties['presence_namespace'],
         ];
     }
 
